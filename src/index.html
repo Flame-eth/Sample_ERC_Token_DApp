@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>EphToken World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <div class="styleall">
+      <header>
+        <div>
+          <h1 class="marginbt">Welcome to the world of EphToken!</h1>
+          <h2 class="marginbt2">Each token is worth $1000</h2>
+          <section class="marginbt">
+            <a href="#" class="marginbt button" id="b1" onclick="buy1Token()">
+              Buy 1 EphToken
+            </a>
+            <a href="#" class="marinbt button" id="b2" onclick="loginWithEth()">
+              Buy More EphToken
+            </a>
+          </section>
+        </div>
+        <img id="tokenpic" src="EphToken.jpeg" />
+      </header>
+    </div>
+    <!-- <div class="page2">
+      <div>
+        <h1 class="future">SEE INTO THE FUTURE OF TECH</h1>
+        <button class="now">Begin!</button>
+      </div>
+    </div> -->
+
+    <script>
+      window.onload = async () => {
+        if (window.ethereum) {
+          window.web3 = new Web3(ethereum);
+          try {
+            await ethereum.enable();
+            const accounts = await web3.eth.getAccounts();
+            window.localStorage.setItem("userAddress", accounts[0]);
+          } catch (error) {
+            console.error(error);
+          }
+        } else {
+          alert("No ETH wallet detected");
+        }
+        showAddress();
+      };
+
+      // window.userAddress = window.localStorage.getItem("userAddress");
+
+      // async function loginWithEth() {
+      //   if (window.web3) {
+      //     try {
+      //       const accounts = await web3.eth.getAccounts();
+      //       const account = accounts[0];
+      //       window.localStorage.setItem[("userAddress", accounts[0])];
+      //     } catch (error) {
+      //       console.error(error);
+      //     }
+      //   } else {
+      //     alert("No ETH wallet detected");
+      //   }
+      // }
+
+      function showAddress() {
+        if (window.localStorage.userAddress) {
+        } else {
+          alert("Impossible");
+        }
+      }
+
+      async function buy1Token() {
+        const ABI = [
+          {
+            inputs: [],
+            stateMutability: "nonpayable",
+            type: "constructor",
+          },
+          {
+            anonymous: false,
+            inputs: [
+              {
+                indexed: true,
+                internalType: "address",
+                name: "owner",
+                type: "address",
+              },
+              {
+                indexed: true,
+                internalType: "address",
+                name: "spender",
+                type: "address",
+              },
+              {
+                indexed: false,
+                internalType: "uint256",
+                name: "value",
+                type: "uint256",
+              },
+            ],
+            name: "Approval",
+            type: "event",
+          },
+          {
+            anonymous: false,
+            inputs: [
+              {
+                indexed: true,
+                internalType: "address",
+                name: "previousOwner",
+                type: "address",
+              },
+              {
+                indexed: true,
+                internalType: "address",
+                name: "newOwner",
+                type: "address",
+              },
+            ],
+            name: "OwnershipTransferred",
+            type: "event",
+          },
+          {
+            anonymous: false,
+            inputs: [
+              {
+                indexed: true,
+                internalType: "address",
+                name: "from",
+                type: "address",
+              },
+              {
+                indexed: true,
+                internalType: "address",
+                name: "to",
+                type: "address",
+              },
+              {
+                indexed: false,
+                internalType: "uint256",
+                name: "value",
+                type: "uint256",
+              },
+            ],
+            name: "Transfer",
+            type: "event",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "owner",
+                type: "address",
+              },
+              {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+              },
+            ],
+            name: "allowance",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "amount",
+                type: "uint256",
+              },
+            ],
+            name: "approve",
+            outputs: [
+              {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+              },
+            ],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "account",
+                type: "address",
+              },
+            ],
+            name: "balanceOf",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [],
+            name: "decimals",
+            outputs: [
+              {
+                internalType: "uint8",
+                name: "",
+                type: "uint8",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "subtractedValue",
+                type: "uint256",
+              },
+            ],
+            name: "decreaseAllowance",
+            outputs: [
+              {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+              },
+            ],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "addedValue",
+                type: "uint256",
+              },
+            ],
+            name: "increaseAllowance",
+            outputs: [
+              {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+              },
+            ],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "name",
+            outputs: [
+              {
+                internalType: "string",
+                name: "",
+                type: "string",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [],
+            name: "owner",
+            outputs: [
+              {
+                internalType: "address",
+                name: "",
+                type: "address",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [],
+            name: "renounceOwnership",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "symbol",
+            outputs: [
+              {
+                internalType: "string",
+                name: "",
+                type: "string",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [],
+            name: "totalSupply",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+              },
+            ],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "to",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "amount",
+                type: "uint256",
+              },
+            ],
+            name: "transfer",
+            outputs: [
+              {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+              },
+            ],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "from",
+                type: "address",
+              },
+              {
+                internalType: "address",
+                name: "to",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "amount",
+                type: "uint256",
+              },
+            ],
+            name: "transferFrom",
+            outputs: [
+              {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+              },
+            ],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "newOwner",
+                type: "address",
+              },
+            ],
+            name: "transferOwnership",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "uint256",
+                name: "_amount",
+                type: "uint256",
+              },
+            ],
+            name: "mint",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "recipient",
+                type: "address",
+              },
+              {
+                internalType: "uint256",
+                name: "_amount",
+                type: "uint256",
+              },
+            ],
+            name: "transferToken",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+          {
+            inputs: [],
+            name: "marketCap",
+            outputs: [],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+          {
+            inputs: [
+              {
+                internalType: "address",
+                name: "_account",
+                type: "address",
+              },
+            ],
+            name: "checkBalance",
+            outputs: [],
+            stateMutability: "view",
+            type: "function",
+            constant: true,
+          },
+        ];
+
+        const contract_address = 0x2f55bbdcaa3d14f475e6605e3e4947c9075bd7bc;
+        contract = new window.web3.eth.Contract(ABI, contract_address)({
+          from: localStorage.userAddress,
+        });
+
+        const process = contract.methods.mint().call();
+      }
+    </script>
+  </body>
+</html>
