@@ -345,7 +345,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * @dev Hook that is called before any transfer of tokens. This includes
      * minting and burning.
      *
-     * Calling conditions:
+     * Calling conditions: 
      *
      * - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
      * will be transferred to `to`.
